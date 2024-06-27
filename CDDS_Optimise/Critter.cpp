@@ -49,12 +49,5 @@ void Critter::Draw()
 	if (m_isLoaded == false)
 		return;
 	
-	//DrawTexture(*m_texture, m_position.x, m_position.y, WHITE);
-	Rectangle test{ 0, 0, m_texture->width, m_texture->height };
-
-	Rectangle test2{ m_position.x, m_position.y, m_texture->width, m_texture->height };
-
-
-	DrawTexturePro(*m_texture, test, test2, {origin.x * m_texture->width, origin.y * m_texture->height }, 0.0f, WHITE);
-
+	DrawTexturePro(*m_texture, { 0, 0, (float)m_texture->width, (float)m_texture->height }, { m_position.x, m_position.y, (float)m_texture->width, (float)m_texture->height }, {origin.x * m_texture->width, origin.y * m_texture->height }, 0.0f, WHITE);
 }

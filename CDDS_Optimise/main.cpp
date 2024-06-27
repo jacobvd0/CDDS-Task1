@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
     int screenWidth = 800;
     int screenHeight = 450;
 
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
+    InitWindow(screenWidth, screenHeight, "CDDS - Task 1");
 
     //SetTargetFPS(60);
     //--------------------------------------------------------------------------------------
@@ -212,12 +212,9 @@ int main(int argc, char* argv[])
             critters[i].Draw();
         }
         // draw the destroyer
-        // (if you're wondering why it looks a little odd when sometimes critters are destroyed when they're not quite touching the 
-        // destroyer, it's because the origin is at the top-left. ...you could fix that!)
         destroyer.Draw();
 
         DrawFPS(10, 10);
-        //DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
