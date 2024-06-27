@@ -1,4 +1,5 @@
 #include "Critter.h"
+#include "HashTable.h"
 
 
 Critter::Critter()
@@ -11,24 +12,23 @@ Critter::Critter()
 
 Critter::~Critter()
 {
-	UnloadTexture(m_texture);
 	m_isLoaded = false;
 }
 
-void Critter::Init(Vector2 position, Vector2 velocity, float radius, const char* texture)
+void Critter::Init(Vector2 position, Vector2 velocity, float radius, const char* texture, HashTable* hashTable)
 {
 	m_position = position;
 	m_velocity = velocity;
 	m_radius = radius;
 	
-	m_texture = LoadTexture(texture);	
+	m_texture = (hashTable->operator[](texture));
 
 	m_isLoaded = true;
 }
 
 void Critter::Destroy()
 {
-	UnloadTexture(m_texture);
+	m_texture = nullptr;
 	m_isLoaded = false;
 }
 
@@ -48,6 +48,13 @@ void Critter::Draw()
 {
 	if (m_isLoaded == false)
 		return;
+	
+	//DrawTexture(*m_texture, m_position.x, m_position.y, WHITE);
+	Rectangle test{ 0, 0, m_texture->width, m_texture->height };
 
-	DrawTexture(m_texture, m_position.x, m_position.y, WHITE);
+	Rectangle test2{ m_position.x, m_position.y, m_texture->width, m_texture->height };
+
+
+	DrawTexturePro(*m_texture, test, test2, {origin.x * m_texture->width, origin.y * m_texture->height }, 0.0f, WHITE);
+
 }

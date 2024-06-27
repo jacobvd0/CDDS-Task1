@@ -24,6 +24,8 @@
 #include <random>
 #include <time.h>
 #include "Critter.h"
+#include "HashTable.h"
+#include "HashTable.h"
 
 int main(int argc, char* argv[])
 {
@@ -46,6 +48,18 @@ int main(int argc, char* argv[])
     const int CRITTER_COUNT = 50;
     const int MAX_VELOCITY = 80;
 
+    // Load the critter and destoyer textures
+    Texture2D crit = LoadTexture("res/10.png");
+    Texture2D dest = LoadTexture("res/9.png");
+
+
+    // Add the textures to the hash table
+    HashTable textureTable;
+    textureTable["critter"] = &crit;
+    textureTable["destroyer"] = &dest;
+
+
+
     for (int i = 0; i < CRITTER_COUNT; i++)
     {
         // create a random direction vector for the velocity
@@ -57,14 +71,14 @@ int main(int argc, char* argv[])
         critters[i].Init(
             { (float)(5+rand() % (screenWidth-10)), (float)(5+(rand() % screenHeight-10)) },
             velocity,
-            12, "res/10.png");
+            12, "critter", & textureTable);
     }
 
 
     Critter destroyer;
     Vector2 velocity = { -100 + (rand() % 200), -100 + (rand() % 200) };
     velocity = Vector2Scale(Vector2Normalize(velocity), MAX_VELOCITY);
-    destroyer.Init(Vector2{ (float)(screenWidth >> 1), (float)(screenHeight >> 1) }, velocity, 20, "res/9.png");
+    destroyer.Init(Vector2{ (float)(screenWidth >> 1), (float)(screenHeight >> 1) }, velocity, 20, "destroyer", &textureTable);
 
     float timer = 1;
     Vector2 nextSpawnPos = destroyer.GetPosition();
@@ -179,7 +193,7 @@ int main(int argc, char* argv[])
                     Vector2 pos = destroyer.GetPosition();
                     pos = Vector2Add(pos, Vector2Scale(normal, -50));
                     // its pretty ineficient to keep reloading textures. ...if only there was something else we could do
-                    critters[i].Init(pos, Vector2Scale(normal, -MAX_VELOCITY), 12, "res/10.png");
+                    critters[i].Init(pos, Vector2Scale(normal, -MAX_VELOCITY), 12, "critter", &textureTable);
                     break;
                 }
             }
