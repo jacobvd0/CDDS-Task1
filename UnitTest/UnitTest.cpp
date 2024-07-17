@@ -8,33 +8,45 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace UnitTest
 {
-	TEST_CLASS(UnitTest)
+	TEST_CLASS(HashTableTests)
 	{
 	public:
 		
 
 		TEST_METHOD(CritterTest)
 		{
-			HashTable ht;
-
 			Texture2D crit = LoadTexture("../CDDS_Optimise/res/10.png");
 
-			ht["critter"] = &crit;
+			HashTable textureTable;
+			textureTable["critter"] = &crit;
 			
-			Assert::AreEqual(crit.id, ht["critter"]->id);
+			Assert::AreSame(crit.id, textureTable["critter"]->id);
 		}
 
 		TEST_METHOD(DestroyerTest)
 		{
-			HashTable ht;
-
-			ht["critter"] = &LoadTexture("../CDDS_Optimise/res/10.png");
-
 			Texture2D dest = LoadTexture("../CDDS_Optimise/res/9.png");
 
-			ht["destroyer"] = &dest;
+			HashTable textureTable;
+			textureTable["destroyer"] = &dest;
 
-			Assert::AreEqual(dest.id, ht["destroyer"]->id);
+			Assert::AreSame(dest.id, textureTable["destroyer"]->id);
+		}
+	};
+
+	TEST_CLASS(OriginPointTests)
+	{
+	public:
+
+
+		TEST_METHOD(OriginTest)
+		{
+			Texture2D crit = LoadTexture("../CDDS_Optimise/res/10.png");
+
+			HashTable textureTable;
+			textureTable["critter"] = &crit;
+
+			Assert::AreSame(crit.id, textureTable["critter"]->id);
 		}
 	};
 }
