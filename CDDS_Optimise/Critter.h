@@ -41,6 +41,7 @@ public:
 	float GetRadius() { return m_radius; }
 
 	Vector2 GetOrigin() { return origin; }
+	Vector2 GetOriginRaw();
 	void SetOrigin(Vector2 newOrigin) { origin = newOrigin; }
 
 	bool IsDirty() { return m_isDirty; }
@@ -48,5 +49,6 @@ public:
 
 	bool IsDead() { return m_isLoaded == false; }
 
+	
 };
 

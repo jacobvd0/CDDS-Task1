@@ -25,7 +25,6 @@
 #include <time.h>
 #include "Critter.h"
 #include "HashTable.h"
-#include "HashTable.h"
 
 int main(int argc, char* argv[])
 {

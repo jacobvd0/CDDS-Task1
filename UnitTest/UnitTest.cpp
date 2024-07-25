@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "../CDDS_Optimise/HashTable.h"
-#include "../CDDS_Optimise/Critter.h"
+#include "HashTable.h"
+#include "Critter.h"
 #include "raylib.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -41,12 +41,18 @@ namespace UnitTest
 
 		TEST_METHOD(OriginTest)
 		{
-			Texture2D crit = LoadTexture("../CDDS_Optimise/res/10.png");
-
 			HashTable textureTable;
+			Critter testCrit;
+			//Vector2 expected()
+
+			Texture2D crit = LoadTexture("res/10.png");
 			textureTable["critter"] = &crit;
 
-			Assert::AreSame(crit.id, textureTable["critter"]->id);
+			testCrit.Init({ 0,0 }, { 0, 0 }, 0, "critter", &textureTable);
+			testCrit.SetOrigin({ 0.5,0.5 });
+			
+			testCrit.GetOriginRaw();
+			Assert::AreEqual(13.5f, testCrit.GetOriginRaw().x);
 		}
 	};
 }
