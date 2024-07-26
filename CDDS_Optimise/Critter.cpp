@@ -52,8 +52,8 @@ void Critter::Draw()
 	DrawTexturePro(*m_texture, { 0, 0, (float)m_texture->width, (float)m_texture->height }, { m_position.x, m_position.y, (float)m_texture->width, (float)m_texture->height }, {origin.x * m_texture->width, origin.y * m_texture->height }, 0.0f, WHITE);
 }
 
-Vector2 Critter::GetOriginRaw()
+Vector2 Critter::OriginTest(float spriteWidth, float spriteHeight)
 {
-	return { origin.x * m_texture->width, origin.y * m_texture->height };
+	return { origin.x * spriteWidth, origin.y * spriteHeight };
 }
 

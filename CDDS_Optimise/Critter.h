@@ -41,7 +41,7 @@ public:
 	float GetRadius() { return m_radius; }
 
 	Vector2 GetOrigin() { return origin; }
-	Vector2 GetOriginRaw();
+	Vector2 OriginTest(float spriteWidth, float spriteHeight);
 	void SetOrigin(Vector2 newOrigin) { origin = newOrigin; }
 
 	bool IsDirty() { return m_isDirty; }

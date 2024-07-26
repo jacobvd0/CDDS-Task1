@@ -41,18 +41,10 @@ namespace UnitTest
 
 		TEST_METHOD(OriginTest)
 		{
-			HashTable textureTable;
 			Critter testCrit;
-			//Vector2 expected()
-
-			Texture2D crit = LoadTexture("res/10.png");
-			textureTable["critter"] = &crit;
-
-			testCrit.Init({ 0,0 }, { 0, 0 }, 0, "critter", &textureTable);
 			testCrit.SetOrigin({ 0.5,0.5 });
 			
-			testCrit.GetOriginRaw();
-			Assert::AreEqual(13.5f, testCrit.GetOriginRaw().x);
+			Assert::AreEqual(13.5f, testCrit.OriginTest(27, 25).x);
 		}
 	};
 }
