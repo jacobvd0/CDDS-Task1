@@ -20,7 +20,7 @@ namespace UnitTest
 			HashTable textureTable;
 			textureTable["critter"] = &crit;
 			
-			Assert::AreSame(crit.id, textureTable["critter"]->id);
+			Assert::AreSame(textureTable["critter"]->id, crit.id);
 		}
 
 		TEST_METHOD(DestroyerTest)
@@ -30,7 +30,7 @@ namespace UnitTest
 			HashTable textureTable;
 			textureTable["destroyer"] = &dest;
 
-			Assert::AreSame(dest.id, textureTable["destroyer"]->id);
+			Assert::AreSame(textureTable["destroyer"]->id, dest.id);
 		}
 	};
 
