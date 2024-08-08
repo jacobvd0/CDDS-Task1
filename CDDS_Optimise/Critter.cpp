@@ -1,5 +1,6 @@
 #include "Critter.h"
 #include "HashTable.h"
+#include <iostream>
 
 
 Critter::Critter()
@@ -22,6 +23,8 @@ void Critter::Init(Vector2 position, Vector2 velocity, float radius, const char*
 	m_radius = radius;
 	
 	m_texture = (hashTable->operator[](texture));
+
+	std::cout << "TEXTURE: " << m_texture->id << std::endl;
 
 	m_isLoaded = true;
 }

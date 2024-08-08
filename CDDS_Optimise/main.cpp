@@ -71,6 +71,7 @@ int main(int argc, char* argv[])
         critters.Init({ (float)(5 + rand() % (screenWidth - 10)), (float)(5 + (rand() % screenHeight - 10)) },
             velocity,
             12, "critter", &textureTable);
+        std::cout << "Crit Test: " << critters[i]->critTest() << std::endl;
     }
 
 
@@ -184,7 +185,7 @@ int main(int argc, char* argv[])
             // find any dead critters and spit them out (respawn)
             for (int i = 0; i < CRITTER_COUNT; i++)
             {
-                if (critters.CritterExists(i) != true)
+                if (critters.CritterExists(i) == false)
                 {
                     Vector2 normal = Vector2Normalize(destroyer.GetVelocity());
 
@@ -208,7 +209,10 @@ int main(int argc, char* argv[])
         // draw the critters
         for (int i = 0; i < CRITTER_COUNT; i++)
         {
-            critters[i]->Draw();
+            if (critters.CritterExists(i) == true) {
+                critters[i]->Draw();
+            }
+            
         }
         // draw the destroyer
         destroyer.Draw();

@@ -1,7 +1,17 @@
 #include "DynamicArray.h"
 #include "HashTable.h"
+#include <iostream>
 
-Critter* DynamicArray::operator[](const int key)
+DynamicArray::DynamicArray()
+{
+    critterArray = new Critter[1];
+}
+
+DynamicArray::~DynamicArray()
+{
+}
+
+Critter* DynamicArray::operator[](const int key) const
 {
     return &critterArray[key];
 }
@@ -11,7 +21,7 @@ void DynamicArray::Init(Vector2 position, Vector2 velocity, float radius, const 
     Critter newCrit;
     if (critterCount != 0) {
         critterCount++;
-        Critter* tmpArray = new Critter[critterCount+1];
+        Critter* tmpArray = new Critter[critterCount];
         for (int i = 0; i < critterCount; i++) {
             tmpArray[i] = critterArray[i];
         }
@@ -25,6 +35,8 @@ void DynamicArray::Init(Vector2 position, Vector2 velocity, float radius, const 
         delete[] critterArray;
         critterArray = tmpArray;
     }
+    std::cout << "CREATE: " << critterCount << "\nPOS: " << position.x << ", " << position.y << "\nVelocity: "<< velocity.x<< ", " << velocity.y << "\nRadius: "<< radius << "\nTexture: " << texture << "\nHashtable: " << hashTable->isWorking() << "\n\n";
+    std::cout << "Actual size: " << sizeof(critterArray) << std::endl;
     newCrit.Init(position, velocity, radius, texture, hashTable);
 }
 
@@ -38,19 +50,20 @@ void DynamicArray::Destroy(int arrayLoc)
     }
 
 
-    Critter* tmpArray = new Critter[critterCount - 1];
+    Critter* tmpArray = new Critter[critterCount-1];
     int setLoc = 0;
     for (int i = 0; i <= critterCount; i++) {
-        if (i == arrayLoc) { return; }
+        if (i == arrayLoc) { continue; }
 
         tmpArray[setLoc] = tmpArray[i];
         tmpArray++;
     }
+    std::cout << "DESTROY: " << critterCount << "\n";
 }
 
 bool DynamicArray::CritterExists(int arrayLoc)
 {
-    if (arrayLoc + 1 == critterCount) {
+    if (arrayLoc + 1 <= critterCount) {
         return true;
     }
     else {

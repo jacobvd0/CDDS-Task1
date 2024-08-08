@@ -50,5 +50,6 @@ public:
 	bool IsDead() { return m_isLoaded == false; }
 
 	
+	bool critTest() { return true; }
 };
 
