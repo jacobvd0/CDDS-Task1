@@ -68,10 +68,7 @@ int main(int argc, char* argv[])
         velocity = Vector2Scale(Vector2Normalize(velocity), MAX_VELOCITY);
 
         // create a critter in a random location
-        critters.Init({ (float)(5 + rand() % (screenWidth - 10)), (float)(5 + (rand() % screenHeight - 10)) },
-            velocity,
-            12, "critter", &textureTable);
-        std::cout << "Crit Test: " << critters[i]->critTest() << std::endl;
+        critters.Init(12, "critter", &textureTable);
     }
 
 
@@ -115,7 +112,7 @@ int main(int argc, char* argv[])
 
         // update the critters
         // (dirty flags will be cleared during update)
-        for (int i = 0; i < CRITTER_COUNT; i++)
+        for (int i = 0; i < critters.GetCritCount(); i++)
         {
             critters[i]->Update(delta);
 
@@ -140,6 +137,7 @@ int main(int argc, char* argv[])
             // kill any critter touching the destroyer
             // simple circle-to-circle collision check
             float dist = Vector2Distance(critters[i]->GetPosition(), destroyer.GetPosition());
+            
             if (dist < critters[i]->GetRadius() + destroyer.GetRadius())
             {
                 critters.Destroy(i);
@@ -182,7 +180,7 @@ int main(int argc, char* argv[])
         {
             timer = 1;
 
-            // find any dead critters and spit them out (respawn)
+             //find any dead critters and spit them out (respawn)
             for (int i = 0; i < CRITTER_COUNT; i++)
             {
                 if (critters.CritterExists(i) == false)
@@ -193,7 +191,7 @@ int main(int argc, char* argv[])
                     Vector2 pos = destroyer.GetPosition();
                     pos = Vector2Add(pos, Vector2Scale(normal, -50));
                     // its pretty ineficient to keep reloading textures. ...if only there was something else we could do
-                    critters.Init(pos, Vector2Scale(normal, -MAX_VELOCITY), 12, "critter", &textureTable);
+                    critters.Init(12, "critter", &textureTable);
                     break;
                 }
             }
@@ -207,10 +205,10 @@ int main(int argc, char* argv[])
         ClearBackground(RAYWHITE);
 
         // draw the critters
-        for (int i = 0; i < CRITTER_COUNT; i++)
+        for (int i = 0; i < critters.GetCritCount(); i++)
         {
             if (critters.CritterExists(i) == true) {
-                critters[i]->Draw();
+                critters.Draw(i);
             }
             
         }

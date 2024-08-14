@@ -6,18 +6,18 @@ class HashTable;
 
 class Critter
 {
-protected:	
+protected:
 	Vector2 m_position;
 	Vector2 m_velocity;
 	float m_radius;
 
-	Texture2D * m_texture;
+	Texture2D* m_texture;
 
 	bool m_isLoaded;
 	bool m_isDirty;		// indicates if we've already processed a collision response for this critter
 
 	Vector2 origin{ 0.5f, 0.5f }; // defauts to the centre of the sprite
-	
+
 public:
 	Critter();
 	~Critter();
@@ -49,7 +49,8 @@ public:
 
 	bool IsDead() { return m_isLoaded == false; }
 
-	
+
 	bool critTest() { return true; }
+	bool isLoaded() { return m_isLoaded; }
 };
 

@@ -24,8 +24,6 @@ void Critter::Init(Vector2 position, Vector2 velocity, float radius, const char*
 	
 	m_texture = (hashTable->operator[](texture));
 
-	std::cout << "TEXTURE: " << m_texture->id << std::endl;
-
 	m_isLoaded = true;
 }
 
@@ -49,8 +47,11 @@ void Critter::Update(float dt)
 
 void Critter::Draw()
 {
-	if (m_isLoaded == false)
+	if (m_isLoaded == false) {
+		std::cout << "NOT LOADED\n";
 		return;
+	}
+		
 	
 	DrawTexturePro(*m_texture, { 0, 0, (float)m_texture->width, (float)m_texture->height }, { m_position.x, m_position.y, (float)m_texture->width, (float)m_texture->height }, {origin.x * m_texture->width, origin.y * m_texture->height }, 0.0f, WHITE);
 }
